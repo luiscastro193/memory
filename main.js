@@ -62,19 +62,22 @@ let picked = null;
 let toTurn = [];
 
 function turnCards() {
-	for (let card of toTurn)
+	for (let card of toTurn) {
 		card.element.src = "cards/back.svg";
+		card.isUp = false;
+	}
 	
 	toTurn = [];
 }
 
 function pick(card) {
+	if (card.isUp)
+		return;
+	
 	card.element.src = `cards/${card.suit}${card.number}.svg`;
+	card.isUp = true;
 	
 	if (picked) {
-		if (picked.number == card.number && picked.suit == card.number)
-			return;
-		
 		if (picked.number != card.number)
 			toTurn.push(picked, card);
 		
