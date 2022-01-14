@@ -18,11 +18,13 @@ function setColumns(columns) {
 
 function resizeDeck() {
 	requestAnimationFrame(function() {
-		let columns = 2
-		setColumns(columns);
-		
-		while(main.scrollHeight > main.clientHeight)
-			setColumns(++columns);
+		requestAnimationFrame(function() {
+			let columns = 2
+			setColumns(columns);
+
+			while(main.scrollHeight > main.clientHeight)
+				setColumns(++columns);
+		});
 	});
 };
 
