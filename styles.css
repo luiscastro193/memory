@@ -1,0 +1,25 @@
+:root {
+	--columns: 2;
+}
+
+* {
+	font-family: 'Lexend', sans-serif;
+}
+
+.full-size {
+	position: fixed;
+	top: 0; bottom: 0; left: 0; right: 0;
+	overflow: hidden;
+	background-color: black;
+}
+
+.deck {
+	display: grid;
+	grid-template-columns: repeat(var(--columns), 1fr);
+	grid-gap: 5px;
+	margin: 5px;
+}
+
+.deck > img {
+	width: 100%;
+}
