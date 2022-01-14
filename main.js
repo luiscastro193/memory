@@ -30,7 +30,7 @@ function resizeDeck() {
 
 let img = document.querySelector('img');
 
-if (img.naturalHeight)
+if (img.complete)
 	resizeDeck();
 else
 	img.addEventListener('load', resizeDeck);
