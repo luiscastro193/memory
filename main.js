@@ -70,6 +70,9 @@ function pick(card) {
 	card.element.src = `cards/${card.suit}${card.number}.svg`;
 	
 	if (picked) {
+		if (picked.number == card.number && picked.suit == card.number)
+			return;
+		
 		if (picked.number != card.number)
 			toTurn.push(picked, card);
 		
