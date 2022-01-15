@@ -19,7 +19,7 @@ function setColumns(columns) {
 function resizeDeck() {
 	requestAnimationFrame(function() {
 		requestAnimationFrame(function() {
-			let columns = 2
+			let columns = 4;
 			setColumns(columns);
 
 			while(main.scrollHeight > main.clientHeight)
