@@ -33,7 +33,7 @@ let debouncer;
 if (img.complete)
 	resizeDeck();
 else
-	img.addEventListener('load', resizeDeck);
+	img.addEventListener('load', resizeDeck, {once: true});
 
 window.addEventListener('resize', function() {
 	clearTimeout(debouncer);
