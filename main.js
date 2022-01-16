@@ -2,7 +2,6 @@
 const root = document.querySelector(':root');
 let main = document.querySelector('main');
 let deck = document.querySelector('.deck');
-let debouncer;
 
 function cardElement() {
 	let svg = document.createElement("img");
@@ -29,6 +28,7 @@ function resizeDeck() {
 };
 
 let img = document.querySelector('img');
+let debouncer;
 
 if (img.complete)
 	resizeDeck();
