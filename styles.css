@@ -2,10 +2,6 @@
 	--columns: 5;
 }
 
-* {
-	font-family: 'Lexend', sans-serif;
-}
-
 .full-size {
 	position: fixed;
 	top: 0; bottom: 0; left: 0; right: 0;
