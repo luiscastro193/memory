@@ -40,12 +40,14 @@ window.addEventListener('resize', function() {
 	debouncer = setTimeout(resizeDeck, 100);
 });
 
-let cards = [];
-
-for (let suit of ["club", "diamond", "heart", "spade"]) {
-	for (let number = 1; number <= 10; number++)
-		cards.push({number, suit});
+function* cardGenerator() {
+	for (let suit of ["club", "diamond", "heart", "spade"]) {
+		for (let number = 1; number <= 10; number++)
+			yield {number, suit};
+	}
 }
+
+let cards = [...cardGenerator()];
 
 function shuffle(array) {
 	for (let i = array.length - 1; i > 0; i--) {
