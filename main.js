@@ -99,7 +99,7 @@ for (let i = 0; i < 40; i++) {
 }
 
 function cacheImages() {
-	caches.open("cards").then(cache => cache.addAll(cards.map(card => card.url)));
+	cards.map(card => fetch(card.url));
 }
 
 if (window.requestIdleCallback)
