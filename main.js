@@ -98,4 +98,4 @@ for (let i = 0; i < 40; i++) {
 	card.element.addEventListener('click', () => pick(card));
 }
 
-cards.map(card => fetch(card.url, {cache: "reload"}));
+cards.map(card => fetch(card.url, {cache: "no-cache"}));
