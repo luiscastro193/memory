@@ -76,7 +76,7 @@ function pick(card) {
 	if (card.isUp)
 		return;
 	
-	card.element.src = `cards/${card.suit}${card.number}.svg`;
+	card.element.src = card.url;
 	card.isUp = true;
 	
 	if (picked) {
@@ -93,6 +93,9 @@ function pick(card) {
 
 for (let i = 0; i < 40; i++) {
 	let card = cards[i];
+	card.url = `cards/${card.suit}${card.number}.svg`;
 	card.element = deck.children[i];
 	card.element.addEventListener('click', () => pick(card));
-} 
+}
+
+caches.open("cards").then(cache => cache.addAll(cards.map(card => card.url)));
