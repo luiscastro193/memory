@@ -98,4 +98,11 @@ for (let i = 0; i < 40; i++) {
 	card.element.addEventListener('click', () => pick(card));
 }
 
-caches.open("cards").then(cache => cache.addAll(cards.map(card => card.url)));
+function cacheImages() {
+	caches.open("cards").then(cache => cache.addAll(cards.map(card => card.url)));
+}
+
+if (window.requestIdleCallback)
+	requestIdleCallback(cacheImages);
+else
+	setTimeout(cacheImages, 0);
