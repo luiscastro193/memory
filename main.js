@@ -98,11 +98,4 @@ for (let i = 0; i < 40; i++) {
 	card.element.addEventListener('click', () => pick(card));
 }
 
-function cacheImages() {
-	cards.map(card => fetch(card.url));
-}
-
-if (window.requestIdleCallback)
-	requestIdleCallback(cacheImages);
-else
-	setTimeout(cacheImages, 0);
+cards.map(card => fetch(card.url, {cache: "reload"}));
