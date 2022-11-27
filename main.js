@@ -98,15 +98,8 @@ for (let i = 0; i < 40; i++) {
 	card.element.addEventListener('click', () => pick(card));
 }
 
-function prefetch(url) {
-	let element = document.createElement("link");
-	element.rel = "prefetch";
-	element.href = url;
-	return element;
-}
-
 function cacheImages() {
-	document.head.append(...cards.map(card => prefetch(card.url)));
+	caches.open("cards").then(cache => cache.addAll(cards.map(card => card.url)));
 }
 
 if (window.requestIdleCallback)
