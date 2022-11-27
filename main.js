@@ -105,4 +105,11 @@ function prefetch(url) {
 	return element;
 }
 
-document.head.append(...cards.map(card => prefetch(card.url)));
+function cacheImages() {
+	document.head.append(...cards.map(card => prefetch(card.url)));
+}
+
+if (window.requestIdleCallback)
+	requestIdleCallback(cacheImages);
+else
+	setTimeout(cacheImages, 0);
