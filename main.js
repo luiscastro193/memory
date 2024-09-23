@@ -35,7 +35,7 @@ function debounce(callback) {
 			setTimeout(() => {
 				pending = false;
 				callback();
-			}, 0);
+			});
 		}
 	}
 }
