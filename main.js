@@ -29,8 +29,8 @@ function debounce(callback) {
 		if (!pending) {
 			pending = true;
 			setTimeout(() => {
-				requestAnimationFrame(function() {
-					requestAnimationFrame(function() {
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
 						pending = false;
 						callback();
 					});
