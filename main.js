@@ -16,29 +16,39 @@ function setColumns(columns) {
 }
 
 function resizeDeck() {
-	requestAnimationFrame(function() {
-		requestAnimationFrame(function() {
-			let columns = 4;
-			setColumns(columns);
+	let columns = 4;
+	setColumns(columns);
 
-			while(main.scrollHeight > main.clientHeight)
-				setColumns(++columns);
-		});
-	});
+	while(main.scrollHeight > main.clientHeight)
+		setColumns(++columns);
 };
 
+function debounce(callback) {
+	let pending = false;
+	return () => {
+		if (!pending) {
+			pending = true;
+			setTimeout(() => {
+				requestAnimationFrame(function() {
+					requestAnimationFrame(function() {
+						pending = false;
+						callback();
+					});
+				});
+			}, 0);
+		}
+	}
+}
+
+resizeDeck = debounce(resizeDeck);
 let img = document.querySelector('img');
-let debouncer;
 
 if (img.complete)
 	resizeDeck();
 else
 	img.addEventListener('load', resizeDeck, {once: true});
 
-window.addEventListener('resize', function() {
-	clearTimeout(debouncer);
-	debouncer = setTimeout(resizeDeck, 100);
-});
+window.addEventListener('resize', resizeDeck);
 
 function* cardGenerator() {
 	for (let suit of ["club", "diamond", "heart", "spade"]) {
