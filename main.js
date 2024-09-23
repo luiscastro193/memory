@@ -16,11 +16,15 @@ function setColumns(columns) {
 }
 
 function resizeDeck() {
-	let columns = 4;
-	setColumns(columns);
+	requestAnimationFrame(() => {
+		requestAnimationFrame(() => {
+			let columns = 4;
+			setColumns(columns);
 
-	while(main.scrollHeight > main.clientHeight)
-		setColumns(++columns);
+			while(main.scrollHeight > main.clientHeight)
+				setColumns(++columns);
+		});
+	});
 };
 
 function debounce(callback) {
@@ -29,29 +33,20 @@ function debounce(callback) {
 		if (!pending) {
 			pending = true;
 			setTimeout(() => {
-				requestAnimationFrame(() => {
-					requestAnimationFrame(() => {
-						pending = false;
-						callback();
-					});
-				});
+				pending = false;
+				callback();
 			}, 0);
 		}
 	}
 }
 
-function enableResize() {
-	let callback = debounce(resizeDeck);
-	window.addEventListener('resize', callback);
-	callback();
-}
-
+window.addEventListener('resize', debounce(resizeDeck));
 let img = document.querySelector('img');
 
 if (img.complete)
-	enableResize();
+	resizeDeck();
 else
-	img.addEventListener('load', enableResize, {once: true});
+	img.addEventListener('load', resizeDeck, {once: true});
 
 function* cardGenerator() {
 	for (let suit of ["club", "diamond", "heart", "spade"]) {
