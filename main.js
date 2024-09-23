@@ -40,15 +40,18 @@ function debounce(callback) {
 	}
 }
 
-resizeDeck = debounce(resizeDeck);
+function enableResize() {
+	let callback = debounce(resizeDeck);
+	window.addEventListener('resize', callback);
+	callback();
+}
+
 let img = document.querySelector('img');
 
 if (img.complete)
-	resizeDeck();
+	enableResize();
 else
-	img.addEventListener('load', resizeDeck, {once: true});
-
-window.addEventListener('resize', resizeDeck);
+	img.addEventListener('load', enableResize, {once: true});
 
 function* cardGenerator() {
 	for (let suit of ["club", "diamond", "heart", "spade"]) {
