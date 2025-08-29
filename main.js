@@ -15,38 +15,25 @@ function setColumns(columns) {
 	root.style.setProperty('--columns', columns);
 }
 
+let lastId = 0;
+
 function resizeDeck() {
+	const id = lastId = (lastId + 1) % Number.MAX_SAFE_INTEGER;
 	requestAnimationFrame(() => {
 		requestAnimationFrame(() => {
-			let columns = 4;
-			setColumns(columns);
+			if (id == lastId) {
+				let columns = 4;
+				setColumns(columns);
 
-			while(main.scrollHeight > main.clientHeight)
-				setColumns(++columns);
+				while(main.scrollHeight > main.clientHeight)
+					setColumns(++columns);
+			}
 		});
 	});
 };
 
-function debounce(callback) {
-	let pending = false;
-	return () => {
-		if (!pending) {
-			pending = true;
-			setTimeout(() => {
-				pending = false;
-				callback();
-			});
-		}
-	}
-}
-
-window.addEventListener('resize', debounce(resizeDeck));
-let img = document.querySelector('img');
-
-if (img.complete)
-	resizeDeck();
-else
-	img.addEventListener('load', resizeDeck, {once: true});
+document.querySelector('img').addEventListener('load', resizeDeck, {once: true});
+new ResizeObserver(resizeDeck).observe(main);
 
 function* cardGenerator() {
 	for (let suit of ["club", "diamond", "heart", "spade"]) {
