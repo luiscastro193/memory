@@ -93,4 +93,4 @@ for (let i = 0; i < 40; i++) {
 	card.element.addEventListener('click', () => pick(card));
 }
 
-cards.forEach(card => fetch(card.url, {cache: "force-cache", priority: "low"}));
+cards.forEach(card => fetch(card.url, {cache: "no-cache", priority: "low"}));
