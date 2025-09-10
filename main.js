@@ -1,7 +1,8 @@
 "use strict";
+const styles = document.getElementById('styles');
 const root = document.querySelector(':root');
-let main = document.querySelector('main');
-let deck = document.querySelector('.deck');
+const main = document.querySelector('main');
+const deck = document.querySelector('.deck');
 
 function cardElement() {
 	let svg = document.createElement("img");
@@ -31,9 +32,6 @@ function resizeDeck() {
 		});
 	});
 };
-
-document.querySelector('img').addEventListener('load', resizeDeck, {once: true});
-new ResizeObserver(resizeDeck).observe(main);
 
 function* cardGenerator() {
 	for (let suit of ["club", "diamond", "heart", "spade"]) {
@@ -94,3 +92,11 @@ for (let i = 0; i < 40; i++) {
 }
 
 cards.forEach(card => fetch(card.url, {cache: "no-cache", priority: "low"}));
+
+while (!styles.sheet.cssRules.length)
+	await new Promise(resolve => requestAnimationFrame(resolve));
+
+requestAnimationFrame(() => {
+	document.querySelector('img').addEventListener('load', resizeDeck, {once: true});
+	new ResizeObserver(resizeDeck).observe(main);
+});
