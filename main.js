@@ -96,7 +96,5 @@ cards.forEach(card => fetch(card.url, {cache: "no-cache", priority: "low"}));
 while (!styles.sheet.cssRules.length)
 	await new Promise(resolve => requestAnimationFrame(resolve));
 
-requestAnimationFrame(() => {
-	document.querySelector('img').addEventListener('load', resizeDeck, {once: true});
-	new ResizeObserver(resizeDeck).observe(main);
-});
+document.querySelector('img').addEventListener('load', resizeDeck, {once: true});
+new ResizeObserver(resizeDeck).observe(main);
