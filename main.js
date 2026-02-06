@@ -19,7 +19,7 @@ function setColumns(columns) {
 let lastId = 0;
 
 function resizeDeck() {
-	const id = lastId = (lastId + 1) % Number.MAX_SAFE_INTEGER;
+	const id = ++lastId;
 	requestAnimationFrame(() => {
 		requestAnimationFrame(() => {
 			if (id == lastId) {
